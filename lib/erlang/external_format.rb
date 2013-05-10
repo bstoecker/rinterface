@@ -79,7 +79,7 @@ module Erlang
     
     def write_any_raw obj
       debugger
-      case obj.class
+      case obj
       when Symbol then write_symbol(obj)
       when Fixnum, Bignum then write_fixnum(obj)
       when Array then write_tuple(obj)
