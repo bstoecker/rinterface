@@ -81,8 +81,8 @@ module Erlang
       case obj
       when Symbol then write_symbol(obj)
       when Fixnum, Bignum then write_fixnum(obj)
-      #when Array then write_tuple(obj)
-      when Array then write_list(Erlang::Terms::List.new(obj))
+      when Array then write_tuple(obj)
+      #when Array then write_list(Erlang::Terms::List.new(obj))
       when String then write_binary(obj)
       when Pid then write_pid(obj)
       when List then write_list(obj)
@@ -121,6 +121,17 @@ module Erlang
       write_1 num
     end
     
+    def write_tupel_from_hash(data)
+      if data.length < 256
+        write_1 SMALL_TUPLE
+        write_1 data.length
+      else
+        write_1 LARGE_TUPLE
+        write_4 data.length
+      end
+      data.each{|k,v| write_any_raw [k,v] }
+    end
+
     def write_tuple(data)
       if data.length < 256
         write_1 SMALL_TUPLE
