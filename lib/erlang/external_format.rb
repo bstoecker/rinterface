@@ -78,7 +78,6 @@ module Erlang
     end
     
     def write_any_raw obj
-      debugger
       case obj
       when Symbol then write_symbol(obj)
       when Fixnum, Bignum then write_fixnum(obj)
@@ -89,7 +88,6 @@ module Erlang
       when List then write_list(obj)
       when Hash then convert_hash(obj)
       else
-        debugger
         raise "Failed encoding!"
       end
     end
@@ -111,7 +109,6 @@ module Erlang
     end
 
     def convert_hash(hash)
-      debugger
       a = []
       hash.each do |k,v|
         a << [k,v]
@@ -198,7 +195,7 @@ module Erlang
   
     def read_any
       unless read_1 == External::VERSION
-        raise "Bad Math on Version #{read_1} vs #{External::VERSION}"
+        raise "Bad Math on Version #{read(1)} vs #{External::VERSION}"
       end
       read_any_raw
     end
