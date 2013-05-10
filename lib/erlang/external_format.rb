@@ -87,7 +87,7 @@ module Erlang
       when String then write_binary(obj)
       when Pid then write_pid(obj)
       when List then write_list(obj)
-      when Hash then write_tuple(obj)
+#      when Hash then write_tuple(obj)
       else
         raise "Failed encoding!"
       end
@@ -188,8 +188,6 @@ module Erlang
   
     def read_any
       unless read_1 == External::VERSION
-        puts "error!!!"
-        debugger
         raise "Bad Math on Version"
       end
       read_any_raw
