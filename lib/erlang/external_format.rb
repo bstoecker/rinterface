@@ -87,7 +87,7 @@ module Erlang
       when String then write_binary(obj)
       when Pid then write_pid(obj)
       when List then write_list(obj)
-      when Hash then convert_hash(obj)
+      when Hash then debugger; convert_hash(obj)
       else
         raise "Failed encoding!"
       end
