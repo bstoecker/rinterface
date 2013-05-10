@@ -87,7 +87,7 @@ module Erlang
       when String then write_binary(obj)
       when Pid then write_pid(obj)
       when List then write_list(obj)
-#      when Hash then write_tuple(obj)
+      when Hash then convert_hash(obj)
       else
         raise "Failed encoding!"
       end
@@ -108,7 +108,15 @@ module Erlang
     def write_string(string)
       @out.write(string)
     end
-    
+
+    def convert_hash(hash)
+      a = []
+      hash.each do |k,v|
+        a << [k,v]
+      end
+      write_any_raw a
+    end
+
     def write_symbol(sym)
       data = sym.to_s
       write_1 ATOM
