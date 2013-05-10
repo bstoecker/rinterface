@@ -89,6 +89,7 @@ module Erlang
       when List then write_list(obj)
       when Hash then convert_hash(obj)
       else
+        debugger
         raise "Failed encoding!"
       end
     end
