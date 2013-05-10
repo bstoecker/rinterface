@@ -83,7 +83,7 @@ module Erlang
       when Symbol then write_symbol(obj)
       when Fixnum, Bignum then write_fixnum(obj)
       #when Array then write_tuple(obj)
-      when Array then write_list(obj)
+      when Array then write_list(Erlang::Terms::List.new(obj))
       when String then write_binary(obj)
       when Pid then write_pid(obj)
       when List then write_list(obj)
