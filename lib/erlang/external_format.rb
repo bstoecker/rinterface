@@ -78,10 +78,12 @@ module Erlang
     end
     
     def write_any_raw obj
+      debugger
       case obj
       when Symbol then write_symbol(obj)
       when Fixnum, Bignum then write_fixnum(obj)
-      when Array then write_tuple(obj)
+      #when Array then write_tuple(obj)
+      when Array then write_list(obj)
       when String then write_binary(obj)
       when Pid then write_pid(obj)
       when List then write_list(obj)
