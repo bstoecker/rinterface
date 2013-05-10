@@ -187,7 +187,11 @@ module Erlang
     end
   
     def read_any
-      raise "Bad Math on Version" unless read_1 == External::VERSION
+      unless read_1 == External::VERSION
+        puts "error!!!"
+        debugger
+        raise "Bad Math on Version"
+      end
       read_any_raw
     end
   
